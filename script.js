@@ -1,5 +1,5 @@
-const humanScore = 0;
-const computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
   const randomNumber = Math.random();
@@ -13,12 +13,26 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  const HumanChoice = prompt('Which move would you like to select?', '');
-  if (HumanChoice === 'Rock') {
+  const humanInput = prompt('Rock, Paper or Scissors?', '').toLowerCase();
+  if (humanInput === 'rock') {
     return 'Rock'
-  } else if (HumanChoice === 'Paper') {
+  } else if (humanInput === 'paper') {
     return 'Paper'
-  } else if (HumanChoice === 'Scissors') {
+  } else if (humanInput === 'scissors') {
     return 'Scissors'
   }
+}
+
+function playRound(humanChoice, computerChoice) {
+  if ((humanChoice === 'Rock' && computerChoice === 'Scissors') || 
+    (humanChoice === 'Paper' && computerChoice === 'Rock') ||
+    (humanChoice === 'Scissors' && computerChoice === 'Paper')
+  ) {
+    humanScore++;
+    console.log('You Win!');
+  } else if (humanChoice === computerChoice) {
+    console.log('Tie!');
+  } else {
+    computerScore++;
+    console.log('You Lose!');};
 }
