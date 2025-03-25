@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoice() {
   const randomNumber = Math.random();
   if (randomNumber >= 0 && randomNumber < 1 / 3) {
@@ -23,16 +20,37 @@ function getHumanChoice() {
   }
 }
 
-function playRound(humanChoice, computerChoice) {
-  if ((humanChoice === 'Rock' && computerChoice === 'Scissors') || 
-    (humanChoice === 'Paper' && computerChoice === 'Rock') ||
-    (humanChoice === 'Scissors' && computerChoice === 'Paper')
-  ) {
-    humanScore++;
-    console.log('You Win!');
-  } else if (humanChoice === computerChoice) {
-    console.log('Tie!');
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
+
+  function playRound(humanChoice, computerChoice) {
+    if ((humanChoice === 'Rock' && computerChoice === 'Scissors') || 
+      (humanChoice === 'Paper' && computerChoice === 'Rock') ||
+      (humanChoice === 'Scissors' && computerChoice === 'Paper')
+    ) {
+      humanScore++;
+      console.log('You Win!');
+    } else if (humanChoice === computerChoice) {
+      console.log('Tie!');
+    } else {
+      computerScore++;
+      console.log('You Lose!');};
+  }
+
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+
+  if (humanScore > computerScore) {
+    console.log(`You won ${humanScore} rounds while Computer only won ${computerScore}. You are the winner!`);
+  } else if (humanScore < computerScore) {
+    console.log(`Computer won ${computerScore} rounds while you only won ${humanScore}. Computer wins this time!`);
   } else {
-    computerScore++;
-    console.log('You Lose!');};
+    console.log(`You won ${humanScore} rounds but Computer also won ${computerScore} rounds. It's a Tie!`);
+  }
 }
+
+playGame();
