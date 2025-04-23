@@ -7,50 +7,41 @@ function getComputerChoice() {
   } else {
     return 'Scissors';
   }
-}
+};
 
-function getHumanChoice() {
-  const humanInput = prompt('Rock, Paper or Scissors?', '').toLowerCase();
-  if (humanInput === 'rock') {
-    return 'Rock'
-  } else if (humanInput === 'paper') {
-    return 'Paper'
-  } else if (humanInput === 'scissors') {
-    return 'Scissors'
-  }
-}
+const body = document.body;
+const resultsDiv = document.createElement('div');
+body.append(resultsDiv);  
 
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
 
-  function playRound(humanChoice, computerChoice) {
-    if ((humanChoice === 'Rock' && computerChoice === 'Scissors') || 
-      (humanChoice === 'Paper' && computerChoice === 'Rock') ||
-      (humanChoice === 'Scissors' && computerChoice === 'Paper')
-    ) {
-      humanScore++;
-      console.log('You Win!');
+function playRound(humanChoice, computerChoice) {
+  if ((humanChoice === 'Rock' && computerChoice === 'Scissors') || 
+    (humanChoice === 'Paper' && computerChoice === 'Rock') ||
+    (humanChoice === 'Scissors' && computerChoice === 'Paper')
+  ) {
+    humanScore++;
     } else if (humanChoice === computerChoice) {
-      console.log('Tie!');
-    } else {
-      computerScore++;
-      console.log('You Lose!');};
-  }
-
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-
-  if (humanScore > computerScore) {
-    console.log(`You won ${humanScore} rounds while Computer only won ${computerScore}. You are the winner!`);
-  } else if (humanScore < computerScore) {
-    console.log(`Computer won ${computerScore} rounds while you only won ${humanScore}. Computer wins this time!`);
+    console.log('Tie!');
   } else {
-    console.log(`You won ${humanScore} rounds but Computer also won ${computerScore} rounds. It's a Tie!`);
-  }
-}
+    computerScore++;
+  };
 
-playGame();
+  resultsDiv.innerHTML = `Your Score is: ${humanScore} <br> Computer's score is: ${computerScore}`;
+
+  if (humanScore === 5) {
+    alert('You Win!');
+  } else if (computerScore === 5) {
+    alert('You Lose');
+  };
+};
+
+let rock = document.querySelector('#rock');
+rock.addEventListener('click', () => playRound('Rock', getComputerChoice()));
+
+let paper = document.querySelector('#paper');
+paper.addEventListener('click', () => playRound('Paper', getComputerChoice()));
+
+let scissors = document.querySelector('#scissors');
+scissors.addEventListener('click', () => playRound('Scissors', getComputerChoice()));
